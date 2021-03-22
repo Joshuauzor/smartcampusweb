@@ -139,19 +139,26 @@ class Auth extends Controller
                 ];
                 $response = $this->Smartcampusapi->login($userdata);
                 $body = $response->getBody();
-                // get data in decoded format
+                # get data in decoded format
                 if (strpos($response->getHeader('content-type'), 'application/json') !== false)
                 {
                     $responseBody = json_decode($body);
                 }
-                // var_dump($responseBody->data); die;
+                // var_dump($responseBody->token); die;
 
                 if($responseBody->status == 'error'){
                     $session->setFlashdata('error', $responseBody->message);
                     return redirect()->to(base_url());
                 }
                 else if($responseBody->status == 'success'){
-                    $session->set('admin', $responseBody->data);
+                    #session data 
+                    $sessionData = [
+                        'id' => $responseBody->data->id,
+                        'uuid' =>  $responseBody->data->uuid,
+                        'Authorization' => $responseBody->token
+                    ];
+                    // var_dump($sessionData); die;
+                    $session->set('admin', $sessionData);
                     $session->setFlashdata('success', $responseBody->message);
                     return redirect()->to(base_url('dashboard'));
                 }
@@ -223,5 +230,12 @@ class Auth extends Controller
 
         }
         echo view('admin/register', $data);
+    }
+
+    #------------------------ logout -------------------------------------
+    public function logout(){
+        $session = session();
+        $session->destroy('admin');
+        return redirect()->to(base_url('admin/login'));
     }
 }

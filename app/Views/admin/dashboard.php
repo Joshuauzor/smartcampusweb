@@ -64,8 +64,12 @@
             <img src="<?= base_url('public/asset/assets/media/image/user/man_avatar3.jpg') ?>" class="rounded-circle" alt="image">
         </figure>
         <div>
-            <h5>Nikos Pedlow</h5>
+            <h5><?= $user->name ?></h5>
+            <?php if($user->role == 'super_admin' || $user->role == 'admin'): ?>
             <p class="text-muted">Administrator</p>
+            <?php else: ?>
+                <p class="text-muted">User</p>
+            <?php endif ?>
             <ul class="nav">
                 <li class="nav-item">
                     <a href="profile.html" class="btn nav-link bg-info-bright" title="Profile" data-toggle="tooltip">
@@ -78,7 +82,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="login.html" class="btn nav-link bg-danger-bright" title="Logout" data-toggle="tooltip">
+                    <a href="<?= base_url('admin/logout') ?>" class="btn nav-link bg-danger-bright" title="Logout" data-toggle="tooltip">
                         <i data-feather="log-out"></i>
                     </a>
                 </li>
@@ -641,8 +645,12 @@
         <div class="container">
 
             <div class="page-header">
-                <h4>Sales Dashboard</h4>
-                <small class="">Welcome, <span class="text-primary">Nikos Pedlow</span></small>
+                <?php if($user->role == 'super_admin' || $user->role == 'admin'): ?>
+                    <h4>Administrator Dashboard</h4>
+                <?php else: ?>
+                    <h4>User Dashboard</h4>
+                <?php endif ?>
+                <small class="">Welcome, <span class="text-primary"><?= $user->name ?></span></small>
             </div>
 
             <div class="row">
