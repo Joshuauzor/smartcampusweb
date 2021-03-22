@@ -22,72 +22,146 @@ class Auth extends Controller
         $this->Smartcampusapi = new Smartcampusapi();
     }
 
+
+    // public function index()
+	// {
+    //     // $data['title'] = 'Login | Smart Campus';
+    //     $session = session();
+    //     $email = \Config\Services::email();
+
+    //     // call lib
+    //     // $data = 'hello';
+    //     $userdata = [
+    //         'email' => 'Joshuauzor10@gmail.com',
+    //         'name' => 'Joshua Dev',
+    //         'reg_no' => '18/CSC/177',
+    //         'password' => 'hashedPass',
+    //         'confirm_pass' => 'hashedPass',
+    //         'gender' => 'male',
+    //         'role' => '1',
+    //         'status'=> '1',
+    //         'school_id' => 1,
+    //         'level_id' => 1,
+    //         'semester_id' => 1,
+
+    //     ];
+    //     $response = $this->Smartcampusapi->login($userdata);
+    //     return $response;
+    // }
+
+    // public function index()
+	// {
+    //     $data['title'] = 'Login | Smart Campus';
+    //     $session = session();
+    //     $email = \Config\Services::email();
+
+    //     if($this->request->getMethod() == 'post'){
+    //         $rules = [
+    //             'email' => [
+    //                 'rules' =>  'required|min_length[5]|valid_email|trim',
+    //                 'errors' => [
+    //                     'valid_email' => 'Please Enter A Valid Email',
+    //                     'required' => 'Email is required',
+    //                     'min_length' => 'Email is too short'
+    //                 ]
+    //             ], 
+    //             'password' => 'required|min_length[5]',
+                
+    //         ];
+
+    //         if($this->validate($rules)){
+    //             // use throttler
+    //             $User_Model = new User_model();
+
+    //             $user = $User_Model->getMail($this->request->getVar('email'));
+    //             if($user){
+    //                 $verifyPass = password_verify($this->request->getVar('password'), $user->password);
+    //                 if($verifyPass){
+    //                     if($user->status == 'active'){
+    //                         if($user->role == 'super_admin'){
+    //                             // set session
+    //                             return redirect()->to(base_url('dashboard'));
+    
+    //                         }
+    //                         else if($user->role == 'admin'){
+    //                             return redirect()->to(base_url('dashboard'));
+    //                         }
+    //                     }
+    //                     else{
+    //                         // activate
+    //                         $session->setFlashdata('error', 'Please check your mail to activate your account or Contact Admin');
+    //                         return redirect()->to(current_url());
+    //                     }
+    //                 }
+    //                 else{
+    //                     $session->setFlashdata('error', 'Incorrect Email and/or Password');
+    //                     return redirect()->to(current_url());
+    //                 }
+    //             }
+    //             else{
+    //                 $session->setFlashdata('error', 'Incorrect Email and/or Password');
+    //                 return redirect()->to(current_url());
+    //             }
+    //             // else throttler
+    //         }
+    //         else{
+    //             $data['validation'] = $this->validator;
+    //         }
+    //     }
+
+    //     echo view('admin/login', $data);
+    // }
+
     public function index()
 	{
-        // $data['title'] = 'Login | Smart Campus';
+        $data['title'] = 'Login | Smart Campus';
         $session = session();
         $email = \Config\Services::email();
 
-        // call lib
-        $data = 'hello';
-        $response = $this->Smartcampusapi->login($data);
-        return $response;
-        // end
-        // if($this->request->getMethod() == 'post'){
-        //     $rules = [
-        //         'email' => [
-        //             'rules' =>  'required|min_length[5]|valid_email|trim',
-        //             'errors' => [
-        //                 'valid_email' => 'Please Enter A Valid Email',
-        //                 'required' => 'Email is required',
-        //                 'min_length' => 'Email is too short'
-        //             ]
-        //         ], 
-        //         'password' => 'required|min_length[5]',
+        if($this->request->getMethod() == 'post'){
+            $rules = [
+                'email' => [
+                    'rules' =>  'required|min_length[5]|valid_email|trim',
+                    'errors' => [
+                        'valid_email' => 'Please Enter A Valid Email',
+                        'required' => 'Email is required',
+                        'min_length' => 'Email is too short'
+                    ]
+                ], 
+                'password' => 'required|min_length[5]',
                 
-        //     ];
+            ];
 
-        //     if($this->validate($rules)){
-        //         // use throttler
-        //         $User_Model = new User_model();
+            if($this->validate($rules)){
+                $userdata = [
+                    'email' => $this->request->getVar('email'),
+                    'password' => $this->request->getVar('password'),
+                ];
+                $response = $this->Smartcampusapi->login($userdata);
+                $body = $response->getBody();
+                // get data in decoded format
+                if (strpos($response->getHeader('content-type'), 'application/json') !== false)
+                {
+                    $responseBody = json_decode($body);
+                }
+                // var_dump($responseBody->data); die;
 
-        //         $user = $User_Model->getMail($this->request->getVar('email'));
-        //         if($user){
-        //             $verifyPass = password_verify($this->request->getVar('password'), $user->password);
-        //             if($verifyPass){
-        //                 if($user->status == 'active'){
-        //                     if($user->role == 'super_admin'){
-        //                         // set session
-        //                         return redirect()->to(base_url('dashboard'));
-    
-        //                     }
-        //                     else if($user->role == 'admin'){
-        //                         return redirect()->to(base_url('dashboard'));
-        //                     }
-        //                 }
-        //                 else{
-        //                     // activate
-        //                     $session->setFlashdata('error', 'Please check your mail to activate your account or Contact Admin');
-        //                     return redirect()->to(current_url());
-        //                 }
-        //             }
-        //             else{
-        //                 $session->setFlashdata('error', 'Incorrect Email and/or Password');
-        //                 return redirect()->to(current_url());
-        //             }
-        //         }
-        //         else{
-        //             $session->setFlashdata('error', 'Incorrect Email and/or Password');
-        //             return redirect()->to(current_url());
-        //         }
-        //         // else throttler
-        //     }
-        //     else{
-        //         $data['validation'] = $this->validator;
-        //     }
-        // }
+                if($responseBody->status == 'error'){
+                    $session->setFlashdata('error', $responseBody->message);
+                    return redirect()->to(base_url());
+                }
+                else if($responseBody->status == 'success'){
+                    $session->set('admin', $responseBody->data);
+                    $session->setFlashdata('success', $responseBody->message);
+                    return redirect()->to(base_url('dashboard'));
+                }
+            }
+            else{
+                $data['validation'] = $this->validator;
+            }
+        }
 
-        // echo view('admin/login', $data);
+        echo view('admin/login', $data);
     }
 
     public function register(){

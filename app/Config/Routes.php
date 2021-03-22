@@ -33,10 +33,10 @@ $routes->setAutoRoute(true);
 // $routes->get('/', 'Home::index');
 $routes->get('/', 'Admin/Auth::index');
 $routes->get('/admin/login', 'Admin/Auth::index');
-// register
+# register
 $routes->get('/admin/register', 'Admin/Auth::register');
-// dashboard
-$routes->get('/dashboard', 'Admin/home::index');
+# dashboard
+$routes->get('/dashboard', 'Admin/home::index'); 
 
 
 /**

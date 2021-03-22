@@ -24,6 +24,7 @@ class Home extends Controller
         $data['title'] = 'Dashboard | Smart Campus';
         $session = session();
         $email = \Config\Services::email();
+        var_dump($session->admin->name); die;
         echo view('admin/dashboard', $data);
     }
 }
