@@ -54,9 +54,9 @@
     <h5>Sign in</h5>
 
     <!-- form -->
-    <form action="<?= base_url('admin/auth') ?>" method="POST">
+    <form action="<?= base_url('auth') ?>" method="POST">
         <div class="form-group">
-            <input type="text" class="form-control" name="email" placeholder="Username or email" required autofocus>
+            <input type="text" class="form-control" name="email" value="<?= set_value('email') ?>" placeholder="Email or Reg No" required autofocus>
         </div>
         <div class="form-group">
             <input type="password" class="form-control" name="password" placeholder="Password" required>
@@ -110,7 +110,7 @@
         </ul>
         <hr>
         <p class="text-muted">Don't have an account?</p>
-        <a href="<?= base_url('admin/register')?>" class="btn btn-outline-light btn-sm">Register now!</a>
+        <a href="<?= base_url('register')?>" class="btn btn-outline-light btn-sm">Register now!</a>
     </form>
     <!-- ./ form -->
 

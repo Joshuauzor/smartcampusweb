@@ -1,4 +1,4 @@
-<?php namespace App\Controllers\Admin;
+<?php namespace App\Controllers;
 
 use App\Models\User_model;
 use CodeIgniter\Controller;
@@ -15,7 +15,6 @@ use Config\Database;
 class Auth extends Controller
 {
 
-    public $sca;
     public function __construct()
     {
         helper(['form','url','date']);
@@ -236,6 +235,6 @@ class Auth extends Controller
     public function logout(){
         $session = session();
         $session->destroy('admin');
-        return redirect()->to(base_url('admin/login'));
+        return redirect()->to(base_url('login'));
     }
 }

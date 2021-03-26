@@ -1,4 +1,4 @@
-<?php namespace App\Controllers;
+<?php namespace App\Controllers\smartcommerce;
 
 use App\Models\User_model;
 use CodeIgniter\Controller;
@@ -30,10 +30,9 @@ class Home extends Controller
         if(!session()->admin){
             return redirect()->to('admin/logout');
         }
-        $data['title'] = 'Dashboard | Smart Campus';
+        $data['title'] = 'Commerce | Smart Campus';
         $session = session();
         $email = \Config\Services::email();
-        
         #call api
         $apidata = $session->admin; 
         $response = $this->Smartcampusapi->getUser($apidata);
@@ -44,8 +43,9 @@ class Home extends Controller
             $responseBody = json_decode($body);
             // var_dump($responseBody->user); die;
         }
-        $data['uri'] =$this->request->uri->getSegment(1);
         $data['user'] = $responseBody->user;
-        echo view('admin/dashboard', $data);
+        $data['uri'] =$this->request->uri->getSegment(1);
+        // var_dump($this->request->uri->getSegment(1)); die;
+        echo view('smartcommerce/dashboard', $data);
     }
 }

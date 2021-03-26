@@ -1,4 +1,4 @@
-<?php namespace App\Controllers\Admin;
+<?php namespace App\Controllers\smartcampus;
 
 use App\Models\User_model;
 use CodeIgniter\Controller;
@@ -21,7 +21,7 @@ class Home extends Controller
         helper(['form','url','date']);
         $this->Smartcampusapi = new Smartcampusapi();
         if(!session()->admin){
-            return redirect()->to('admin/logout');
+            return redirect()->to('logout');
         }
     }
 
@@ -32,7 +32,7 @@ class Home extends Controller
         }
         $data['title'] = 'Dashboard | Smart Campus';
         $session = session();
-        $email = \Config\Services::email();
+        $email = \Config\Services::email();        
         #call api
         $apidata = $session->admin; 
         $response = $this->Smartcampusapi->getUser($apidata);
@@ -43,7 +43,14 @@ class Home extends Controller
             $responseBody = json_decode($body);
             // var_dump($responseBody->user); die;
         }
+        $data['uri'] = $this->request->uri->getSegment(1);
         $data['user'] = $responseBody->user;
-        echo view('admin/dashboard', $data);
+        #call endpoint
+        $getSchools = $this->Smartcampusapi->getSchools($apidata);
+        # get data in decoded format
+        $fmtSchools = json_decode($getSchools->getBody());
+        #count schools
+        $data['countSchools'] = $fmtSchools->data->count;
+        echo view('smartcampus/dashboard', $data);
     }
 }

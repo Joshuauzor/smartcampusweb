@@ -21,23 +21,38 @@ class Smartcampusapi
     }
 
     #----------------- Get Single User API -------------------------------------------
-    public function getUser($data)
-	{
+    public function getUser($data){
         // $response = $this->client->request('GET', 'getUser', ['auth' => $data]);
         // var_dump('Bearer '. $data['Authorization']); die;
         $response = $this->client->request('GET', '/dashboard/getUser', [
-        'query' => $data,
-        'headers' => [
-            'Authorization' => 'Bearer '. $data['Authorization']
-        ]
-    ]);
+            'query' => $data,
+            'headers' => [
+                'Authorization' => 'Bearer '. $data['Authorization']
+            ]
+        ]);
+        return $response;       
+    }
 
-    //     'headers' => [
-    //         'User-Agent' => 'testing/1.0',
-    //         'Accept'     => 'application/json',
-    //         'X-Foo'      => ['Bar', 'Baz']
-    // ]
+    #----------------- post create school API -------------------------------------------
+    public function createschool($data){
+        
+        $response = $this->client->request('post', '/school/create', [
+            'form_params' => $data,
+            'headers' => [
+                'Authorization' => 'Bearer '. $data['Authorization']
+            ]
+        ]);
+        return $response;       
+    }
 
+    #----------------- get all school and count API -------------------------------------------
+    public function getSchools($data){
+        
+        $response = $this->client->request('get', 'school/getAll', [
+            'headers' => [
+                'Authorization' => 'Bearer '. $data['Authorization']
+            ]
+        ]);
         return $response;       
     }
 }

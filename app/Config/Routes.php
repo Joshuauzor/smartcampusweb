@@ -32,13 +32,18 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
 #AUTH
-$routes->get('/', 'Admin/Auth::index'); #index
-$routes->get('/admin/login', 'Admin/Auth::index'); #login
-$routes->get('/admin/register', 'Admin/Auth::register'); # register
-$routes->get('/admin/logout', 'Admin/Auth::logout'); #logout
+$routes->get('/', 'Auth::index'); #index
+$routes->get('login', 'Auth::index'); #login
+$routes->get('register', 'Auth::register'); # register
+$routes->get('logout', 'Auth::logout'); #logout
 
 # DASHBOARD
-$routes->get('/dashboard', 'Admin/home::index'); 
+$routes->get('/dashboard', 'home::index'); 
+$routes->get('/campus', 'smartcampus/home::index'); 
+$routes->get('/commerce', 'smartcommerce/home::index'); 
+
+#schools
+$routes->get('/school', 'smartcampus/school::index'); 
 
 
 /**
