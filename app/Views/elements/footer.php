@@ -1,48 +1,50 @@
-    <!-- modal -->
-        <div class="modal" tabindex="-1" role="dialog" id="add">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add School</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                    </button>
+<!-- modal add school-->
+    <div class="modal" tabindex="-1" role="dialog" id="add">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add School</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <!-- begin -->
+            <form method="post" action="<?= base_url('smartcampus/school/addschool') ?>">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">School Name</label>
+                    <input type="text" name="school" class="form-control" id="text" aria-describedby="emailHelp" placeholder="Enter School Name" required>
+                    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with</small> -->
                 </div>
-                <div class="modal-body">
-                <!-- begin -->
-                <form method="post" action="<?= base_url('smartcampus/school/addschool') ?>">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">School Name</label>
-                        <input type="text" name="school" class="form-control" id="text" aria-describedby="emailHelp" placeholder="Enter School Name" required>
-                        <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with</small> -->
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Short Name</label>
-                        <input type="text" class="form-control" id="text" name="aka" aria-describedby="emailHelp" placeholder="Enter Short Name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Select City</label>
-                        <select class="form-control" name="city" required>
-                            <option selected disabled>--City--</option>
-                            <option>Lagos</option>
-                            <option>Calabar</option>
-                        </select>
-                    </div>
-                    <!-- <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div> -->
-                    <button type="submit" class="btn btn-primary">Create</button>
-                </form>
-                <!-- end -->
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Short Name</label>
+                    <input type="text" class="form-control" id="text" name="aka" aria-describedby="emailHelp" placeholder="Enter Short Name" required>
                 </div>
-                <div class="modal-footer">
-                    <!-- <button type="button" class="btn btn-primary">Create</button> -->
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Select City</label>
+                    <select class="form-control" name="city" required>
+                        <option selected disabled>--City--</option>
+                        <option>Lagos</option>
+                        <option>Calabar</option>
+                    </select>
                 </div>
-                </div>
+                <!-- <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                </div> -->
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+            <!-- end -->
+            </div>
+            <div class="modal-footer">
+                <!-- <button type="button" class="btn btn-primary">Create</button> -->
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
             </div>
         </div>
+    </div>
+ <!-- begin::footer -->
+
  <!-- begin::footer -->
  <footer>
         <div class="container">
@@ -60,6 +62,9 @@
 </div>
 <!-- end::main -->
 
+
+<!-- sweet alert -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!-- Plugin scripts -->
 <script src="<?= base_url('public/asset/vendors/bundle.js') ?>"></script>
 

@@ -55,4 +55,26 @@ class Smartcampusapi
         ]);
         return $response;       
     }
+
+    #----------------- Delete  school -------------------------------------------
+    public function deleteSchool($data){      
+        $response = $this->client->request('delete', 'school/deleteSchool', [
+            'form_params' => $data,
+            'headers' => [
+                'Authorization' => 'Bearer '. $data['Authorization']
+            ]
+        ]);
+        return $response;       
+    }
+
+    #----------------- Edit  school -------------------------------------------
+    public function editSchool($data){      
+        $response = $this->client->request('put', 'school/editSchool', [
+            'form_params' => $data,
+            'headers' => [
+                'Authorization' => 'Bearer '. $data['Authorization']
+            ]
+        ]);
+        return $response;       
+    }
 }

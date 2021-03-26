@@ -24,5 +24,7 @@
 
     <!-- App styles -->
     <link rel="stylesheet" href="<?= base_url('public/asset/assets/css/app.min.css') ?>" type="text/css">
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <!-- head end -->
